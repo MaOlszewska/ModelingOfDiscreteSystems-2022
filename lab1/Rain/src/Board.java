@@ -31,13 +31,9 @@ public class Board extends JComponent implements MouseInputListener, ComponentLi
 
 		for (int x = 0; x < points.length; ++x)
 			for (int y = 0; y < points[x].length; ++y){
-				if (y == 0) {
-					points[x][y].drop();
-				}
+				if (y == 0) { points[x][y].drop(); }
 				points[x][y].calculateNewState();
-
 			}
-
 		for (int x = 0; x < points.length; ++x)
 			for (int y = 0; y < points[x].length; ++y) {
 				points[x][y].changeState();
@@ -107,22 +103,22 @@ public class Board extends JComponent implements MouseInputListener, ComponentLi
 				if (points[x][y].getState() != 0) {
 					switch (points[x][y].getState()) {
 					case 1:
-						g.setColor(new Color(0.0f, 0.0f, 1.0f, 0.1f));
+						g.setColor(new Color(204, 221, 255));
 						break;
 					case 2:
-						g.setColor(new Color(0.0f, 0.0f, 1.0f, 0.2f));
+						g.setColor(new Color(153, 187, 255));
 						break;
 					case 3:
-						g.setColor(new Color(0.0f, 0.0f, 1.0f, 0.4f));
+						g.setColor(new Color(102, 153, 255));
 						break;						
 					case 4:
-						g.setColor(new Color(0.0f, 0.0f, 1.0f, 0.5f));
+						g.setColor(new Color(51, 119, 255));
 						break;						
 					case 5:
-						g.setColor(new Color(0.0f, 0.0f, 1.0f, 0.7f));
+						g.setColor(new Color(0, 68, 204));
 						break;						
 					case 6:
-						g.setColor(new Color(0.0f, 0.0f, 1.0f, 0.9f));
+						g.setColor(new Color(0, 51, 153));
 						break;						
 					}
 					g.fillRect((x * size) + 1, (y * size) + 1, (size - 1), (size - 1));

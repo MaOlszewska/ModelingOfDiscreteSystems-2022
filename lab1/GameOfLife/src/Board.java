@@ -17,6 +17,8 @@ public class Board extends JComponent implements MouseInputListener, ComponentLi
 	private static final long serialVersionUID = 1L;
 	private Point[][] points;
 	private int size = 14;
+	String point = "normal";
+
 
 	public Board(int length, int height) {
 		addMouseListener(this);
@@ -25,12 +27,17 @@ public class Board extends JComponent implements MouseInputListener, ComponentLi
 		setBackground(Color.WHITE);
 		setOpaque(true);
 	}
+	public void changeCoral(){ point = "coral";}
+
+	public void changeCities(){ point = "cities";}
+
+	public void change(){ point = "normal";}
 
 	// single iteration
 	public void iteration() {
 		for (int x = 0; x < points.length; ++x)
 			for (int y = 0; y < points[x].length; ++y)
-				points[x][y].calculateNewState();
+				points[x][y].calculateNewState(point);
 
 		for (int x = 0; x < points.length; ++x)
 			for (int y = 0; y < points[x].length; ++y)

@@ -21,6 +21,9 @@ public class GUI extends JPanel implements ActionListener, ChangeListener {
 	private Board board;
 	private JButton start;
 	private JButton clear;
+	private JButton coral;
+	private JButton cities;
+	private JButton normal;
 	private JSlider pred;
 	private JFrame frame;
 	private int iterNum = 0;
@@ -53,8 +56,21 @@ public class GUI extends JPanel implements ActionListener, ChangeListener {
 		clear.setToolTipText("Clears the board");
 		clear.addActionListener(this);
 
+		coral = new JButton("Coral");
+		coral.setActionCommand("Coral");
+		coral.addActionListener(this);
+
+		cities = new JButton("Cities");
+		cities.setActionCommand("Cities");
+		cities.addActionListener(this);
+
+		normal = new JButton("Normal");
+		normal.setActionCommand("Normal");
+		normal.addActionListener(this);
+
 		pred = new JSlider();
 		pred.setMinimum(0);
+
 		pred.setMaximum(maxDelay);
 		pred.setToolTipText("Time speed");
 		pred.addChangeListener(this);
@@ -62,6 +78,9 @@ public class GUI extends JPanel implements ActionListener, ChangeListener {
 
 		buttonPanel.add(start);
 		buttonPanel.add(clear);
+		buttonPanel.add(coral);
+		buttonPanel.add(cities);
+		buttonPanel.add(normal);
 		buttonPanel.add(pred);
 
 		board = new Board(1024, 768 - buttonPanel.getHeight());
@@ -98,8 +117,31 @@ public class GUI extends JPanel implements ActionListener, ChangeListener {
 				start.setEnabled(true);
 				board.clear();
 				frame.setTitle("Cellular Automata Toolbox");
-			} 
-
+			}
+			else if (command.equals("Cities")) {
+				iterNum = 0;
+				timer.stop();
+				start.setText("Start");
+				start.setEnabled(true);
+				board.clear();
+				board.changeCities();
+			}
+			else if (command.equals("Coral")) {
+				iterNum = 0;
+				timer.stop();
+				start.setText("Start");
+				start.setEnabled(true);
+				board.clear();
+				board.changeCoral();
+			}
+			else if (command.equals("Normal")) {
+				iterNum = 0;
+				timer.stop();
+				start.setText("Start");
+				start.setEnabled(true);
+				board.clear();
+				board.change();
+			}
 		}
 	}
 

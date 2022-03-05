@@ -16,8 +16,6 @@ public class Program extends JFrame {
 		this.setVisible(true);
 	}
 
-	public static void main(String[] args) {
-		new Program();
-	}
+	public static void main(String[] args) {new Program();}
 
 }
