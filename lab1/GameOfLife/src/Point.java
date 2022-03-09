@@ -87,7 +87,7 @@ public class Point {
 		private int countNeighbour() {
 			int aliveNeighbours = 0;
 			for (Point neighbor : neighbors) {
-				if (neighbor.currentState == 1) aliveNeighbours += 1;
+				if (neighbor.getState() > 0) aliveNeighbours += 1;
 			}
 			return aliveNeighbours;
 		}
