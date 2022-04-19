@@ -8,28 +8,36 @@ public class Point {
 	public int staticField;
 	public boolean isPedestrian;
 	public boolean blocked;
-
+	public int stop;
 
 	public Point() {
 		type=0;
 		staticField = 100000;
 		neighbors= new ArrayList<Point>();
 		blocked = false;
+		stop = 0;
 	}
-	
+	public void stop(){
+		stop = 5;
+	}
 	public void clear() {
 		staticField = 100000;
 	}
 
 	public boolean calcStaticField() {
+		if(neighbors.isEmpty() || this.type == 1){
+			return false;
+		}
 		int smallest =1000000;
+		int counter = 0;
 		for(Point neigh : this.neighbors){
-			if(neigh.staticField < smallest){
+			if(neigh.type != 1 && neigh.staticField < smallest){
 				smallest = neigh.staticField;
 			}
+			else{ counter += 1;}
 		}
-		if(this.staticField > smallest + 1 && this.type != 1){
-			this.staticField = smallest + 1;
+		if(this.staticField > smallest + 1 + counter){
+			this.staticField = smallest + 1 + counter;
 			return true;
 		}
 		return false;
@@ -41,7 +49,8 @@ public class Point {
 			int index = 0;
 			if(neighbors.size() != 0){
 				for(int i = 0; i < neighbors.size() ;i++){
-					if(neighbors.get(i).type != 1) {
+					Point tmp = neighbors.get(i);
+					if(tmp.type != 1 && tmp.type != 3 && !tmp.isPedestrian  ) {
 						if (smallest > neighbors.get(i).staticField) {
 							index = i;
 							smallest = neighbors.get(i).staticField;

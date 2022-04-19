@@ -6,6 +6,7 @@ import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 import javax.swing.JComponent;
 import javax.swing.event.MouseInputListener;
@@ -39,7 +40,18 @@ public class Board extends JComponent implements MouseInputListener, ComponentLi
 				if(points[x][y].isPedestrian && !points[x][y].blocked ){
 					PointsToMove.add(points[x][y]);
 				}
-		for (Point point : PointsToMove){point.move();}
+		Collections.shuffle(PointsToMove);
+		Random random  = new Random();
+		for (Point point : PointsToMove){
+			int rand = random.nextInt(11);
+			if (rand % 2 == 0 && point.stop == 0){
+				point.move();
+			}
+			else if(rand == 1 && point.stop == 0){
+				point.stop();
+			}
+			if(point.stop > 0) point.stop -= 1;
+		}
 		this.repaint();
 	}
 
@@ -95,6 +107,7 @@ public class Board extends JComponent implements MouseInputListener, ComponentLi
 	}
 	
 	private void calculateField(){
+
 		ArrayList<Point> toCheck = new ArrayList<Point>();
 		for (int x = 1; x < points.length-1; ++x) {
 			for (int y = 1; y < points[x].length-1; ++y) {
@@ -107,7 +120,7 @@ public class Board extends JComponent implements MouseInputListener, ComponentLi
 		Point tmp;
 		while(!toCheck.isEmpty()){
 			tmp = toCheck.get(0);
-			if(tmp.calcStaticField()){
+			if(tmp.type != 1 && tmp.calcStaticField()){
 				toCheck.addAll(tmp.neighbors);
 			}
 			toCheck.remove(0);
